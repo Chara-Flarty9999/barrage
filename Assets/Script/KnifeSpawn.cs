@@ -1,20 +1,29 @@
 using System.Collections;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class KnifeSpawn : MonoBehaviour
 {
     public int damage;
     float y;
     float x;
+    /// <summary>
+    /// 直進するナイフ。
+    /// </summary>
     [SerializeField] GameObject m_spawnPrefab = default;
+    /// <summary>
+    /// 進行方向が指定できるナイフ。(上下左右)
+    /// </summary>
     [SerializeField] GameObject m_spawn2Prefab = default;
     public int rote;
     public float wait;
     public float magnification;
+    GameObject _player;
     public string movedirection = "left";
     // Start is called before the first frame update
     void Start()
     {
+        _player = GameObject.Find("Square");
         StartCoroutine("Hard");
     }
 
@@ -22,6 +31,8 @@ public class KnifeSpawn : MonoBehaviour
     IEnumerator Hard()
     {
         magnification = 20f;
+
+        
         for (int i = 0; i < 45; i++)
         {
 
@@ -151,6 +162,38 @@ public class KnifeSpawn : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
             rote -= 35;
         }
+        yield return new WaitForSeconds(0.5f);
+
+        for (int m = 0; m <= 25; m++)
+        {
+            y = Random.Range(-6.0f, 6.0f);
+            x = Random.Range(-13.0f, 13.0f);
+            Vector2 spawn = new Vector2(x, y);
+            //Vector2 dir = _player.transform.position - spawn;
+            transform.position = spawn;
+            this.transform.LookAt(_player.transform);
+            Quaternion dir = this.transform.rotation;
+            rote = (int)(Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg);
+            Instantiate(m_spawnPrefab, spawn, Quaternion.identity);
+            yield return new WaitForSeconds(0.2f);
+        }
+        for (int m = 0;m <= 50; m++)
+        {
+            x = 13;
+            y = Random.Range(-6.0f, 6.0f);
+            Vector2 spawn = new Vector2(x, y);
+            rote = 180;
+            Instantiate(m_spawnPrefab, spawn, Quaternion.identity);
+            yield return new WaitForEndOfFrame();
+            x = -13;
+            y = Random.Range(-6.0f, 6.0f);
+            spawn = new Vector2(x, y);
+            rote = 0;
+            Instantiate(m_spawnPrefab, spawn, Quaternion.identity);
+            yield return new WaitForSeconds(0.3f);
+        }
+
+
 
     }
 

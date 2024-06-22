@@ -1,35 +1,28 @@
-ï»¿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-/// <summary>
-/// ãƒŠã‚¤ãƒ•ã¨åå‰ãŒã¤ã„ã¦ã¯ã„ã‚‹ãŒå®Ÿéš›ã¯æŒ‡å®šã—ãŸæ–¹å‘ã«ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆãŒé£›ã‚“ã§ã„ãã‚‚ã®ã€‚
-///æ±ç”¨æ€§ã ã‘ã¯æ™®é€šã«é«˜ã„ã€‚
-///åˆ¥ã®ç©ºã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã§_rote, _magnificationã‚’è¨­å®šã—ã€ã‚ã¨åº§æ¨™ã‚’Instantiateã§è¨­å®šã™ã‚‹ã ã‘ã€‚
-///ã‚µã‚¦ãƒ³ãƒ‰ã¯ã‚¤ãƒ³ã‚¹ãƒšã‚¯ã‚¿ãƒ¼ã§è¨­å®šã—ã¦ãã ã•ã„ã€‚
-/// </summary>
-public class Knife : MonoBehaviour
-{
 
+public class Bomberbullet : MonoBehaviour
+{
     SpriteRenderer mesh;
     Vector2 movement;
     Rigidbody2D rigidbody2d;
     AudioSource audioSource;
     /// <summary>
-    /// å¬å–šæ™‚ã®éŸ³
+    /// ¢Š«‚Ì‰¹
     /// </summary>
     [SerializeField] AudioClip spawn;
     /// <summary>
-    /// é£›ã‚“ã§ãæ™‚ã®éŸ³
+    /// ”ò‚ñ‚Å‚­‚Ì‰¹
     /// </summary>
     [SerializeField] AudioClip fly;
     /// <summary>
-    /// ãƒŠã‚¤ãƒ•ãŒé£›ã‚“ã§ãè§’åº¦
+    /// ƒiƒCƒt‚ª”ò‚ñ‚Å‚­Šp“x
     /// </summary>
     int _rote;
     float _rotation;
     /// <summary>
-    /// ãƒŠã‚¤ãƒ•ã®åŠ é€Ÿåº¦
+    /// ƒiƒCƒt‚Ì‰Á‘¬“x
     /// </summary>
     float _magnification;
     float _waitTime;
@@ -38,7 +31,7 @@ public class Knife : MonoBehaviour
 
 
     /// <summary>
-    /// ãƒ™ã‚¯ãƒˆãƒ«ã‹ã‚‰è§’åº¦ã‚’å–å¾—ã™ã‚‹ã€‚
+    /// ƒxƒNƒgƒ‹‚©‚çŠp“x‚ğæ“¾‚·‚éB
     /// </summary>
     /// <param name="angle"></param>
     /// <returns></returns>
@@ -51,7 +44,7 @@ public class Knife : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //ã‚¹ãƒãƒ¼ãƒ³æ™‚ã®æƒ…å ±ã‚’å–å¾—ã™ã‚‹
+        //ƒXƒ|[ƒ“‚Ìî•ñ‚ğæ“¾‚·‚é
         GameObject spawner = GameObject.Find("SpawnArea");
         KnifeSpawn knife = spawner.GetComponent<KnifeSpawn>();
         _rote = knife.rote;
@@ -73,9 +66,9 @@ public class Knife : MonoBehaviour
         //Invoke("Destroy");
     }
 
-    IEnumerator Transparent()ã€€//ã“ã“ã§å¬å–šã®æŒ™å‹•ã€‚ãƒ™ã‚¯ãƒˆãƒ«ã‚‚å–å¾—ã—ã¦ã„ã‚‹ã€‚
+    IEnumerator Transparent()@//‚±‚±‚Å¢Š«‚Ì‹““®BƒxƒNƒgƒ‹‚àæ“¾‚µ‚Ä‚¢‚éB
     {
-        if (m_play == true)
+/*        if (m_play == true)
         {
             audioSource.PlayOneShot(spawn);
             for (int i = 0; i < 30; i++)
@@ -87,39 +80,17 @@ public class Knife : MonoBehaviour
             }
             yield return new WaitForSeconds(0.1f);
         }
-
+*/
         _rotation = transform.localEulerAngles.z;
 
         movement = AngleToVector2(_rotation);
+        
 
 
-
-        //c = 1; //ã“ã“ã§é£›ã‚“ã§ã„ãæŒ™å‹•ãŒé–‹å§‹ã•ã‚Œã‚‹ã‚ˆã†ã«ãªã£ã¦ã„ã‚‹ã€‚
+        //c = 1; //‚±‚±‚Å”ò‚ñ‚Å‚¢‚­‹““®‚ªŠJn‚³‚ê‚é‚æ‚¤‚É‚È‚Á‚Ä‚¢‚éB
 
         audioSource.PlayOneShot(fly);
-
-        for (int i = 0; i < 50; i++)
-        {
-            rigidbody2d.AddForce(movement * new Vector2(_magnification, _magnification)); //ForceMode2D.Impulse
-            yield return new WaitForSeconds(0.01f);
-        }
-
-    }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-
-
-    }
-
-    public void Destroy()
-    {
-        
+        rigidbody2d.AddForce(movement * new Vector2(_magnification, _magnification), ForceMode2D.Impulse);
+        yield return null;
     }
 }

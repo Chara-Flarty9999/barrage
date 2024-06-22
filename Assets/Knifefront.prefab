@@ -100,7 +100,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c203a0362c139534d87d1b2f56e8fa0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movement: {x: 0, y: 0}
   spawn: {fileID: 0}
   fly: {fileID: 8300000, guid: 845013c11ea119f40a4f2ef44576eea6, type: 3}
   m_play: 1

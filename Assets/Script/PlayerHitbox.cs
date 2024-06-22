@@ -9,7 +9,7 @@ public class PlayerHitbox : MonoBehaviour
     public static bool inv = false;
     GameObject m_lifeText;
     SpriteRenderer m_player;
-    GameObject player;
+    public static GameObject player;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,12 +38,12 @@ public class PlayerHitbox : MonoBehaviour
             Text lifeText = m_lifeText.GetComponent<Text>();
             lifeText.text = " HP :" + life.ToString() + " / 20  ";
 
-            Invoke("Invisible", invTime);
+            Invoke("invincible", invTime);
 
         }
     }
 
-    void Invisible()
+    void invincible()
     {
         m_player.material.color = new Color32(255, 0, 0, 255);
         inv = false;
