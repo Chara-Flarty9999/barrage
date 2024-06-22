@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -26,22 +24,22 @@ public class PlayerHitbox : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "EnemyBullet" && inv == false)
         {
-            m_player.material.color = new Color32(255, 0, 0, 150); 
+            m_player.material.color = new Color32(255, 0, 0, 150);
             inv = true;
             life -= 1;
             m_AudioSource.Play();
             Text lifeText = m_lifeText.GetComponent<Text>();
-            lifeText.text = " HP :" + life.ToString() + " / 20  " ;
+            lifeText.text = " HP :" + life.ToString() + " / 20  ";
 
-            Invoke("Invisible",invTime);
-            
+            Invoke("Invisible", invTime);
+
         }
     }
 

@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class KnifeSpawn : MonoBehaviour
@@ -28,15 +26,15 @@ public class KnifeSpawn : MonoBehaviour
         {
 
             //transform.position = Vector3.zero;
-            rote = UnityEngine.Random.Range(150,210);
+            rote = UnityEngine.Random.Range(150, 210);
             wait = 0.2f;
-            float x = UnityEngine.Random.Range(10.0f,15.0f);
+            float x = UnityEngine.Random.Range(10.0f, 15.0f);
             y = UnityEngine.Random.Range(-6.0f, 6.0f);
             Vector3 spawn = new Vector3(x, y);
             Instantiate(m_spawnPrefab, spawn, Quaternion.identity);
 
             yield return new WaitForSeconds(0.2f);
-            
+
         }
 
         yield return new WaitForSeconds(0.4f);
@@ -47,7 +45,7 @@ public class KnifeSpawn : MonoBehaviour
             x = 12;
             Vector3 spawn = new Vector3(x, y);
             Instantiate(m_spawnPrefab, spawn, Quaternion.identity);
-            
+
 
             yield return new WaitForSeconds(0.1f);
             y -= 1;
@@ -61,7 +59,7 @@ public class KnifeSpawn : MonoBehaviour
             x = 12;
             Vector3 spawn = new Vector3(x, y);
             Instantiate(m_spawnPrefab, spawn, Quaternion.identity);
-            
+
 
             yield return new WaitForSeconds(0.1f);
             y += 1;
@@ -69,12 +67,12 @@ public class KnifeSpawn : MonoBehaviour
 
         yield return new WaitForSeconds(0.6f);
 
-        for (int i = 0;i < 10; i++)
+        for (int i = 0; i < 10; i++)
         {
             x = 10;
             y = UnityEngine.Random.Range(-6.0f, 6.0f);
             rote = 200;
-            for(int j = 0; j < 10; j++)
+            for (int j = 0; j < 10; j++)
             {
                 Vector3 spawn = new Vector3(x, y);
                 Instantiate(m_spawnPrefab, spawn, Quaternion.identity);
@@ -84,10 +82,10 @@ public class KnifeSpawn : MonoBehaviour
             yield return new WaitForSeconds(0.7f);
         }
         x = 12;
-        for (int i = 0;i < 5 ; i++)
+        for (int i = 0; i < 5; i++)
         {
             magnification = 8;
-            for (int j = 0;j < 2;j++)
+            for (int j = 0; j < 2; j++)
             {
                 y = 0;
                 rote = 90;
@@ -131,7 +129,7 @@ public class KnifeSpawn : MonoBehaviour
         }
         yield return new WaitForSeconds(0.6f);
         rote = 180;
-        for (int m = 0;m < 50; m++)
+        for (int m = 0; m < 50; m++)
         {
             x = -12;
             y = 5;
@@ -153,7 +151,7 @@ public class KnifeSpawn : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
             rote -= 35;
         }
-        
+
     }
 
     // Update is called once per frame

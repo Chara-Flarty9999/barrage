@@ -2,35 +2,37 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-
+/// <summary>
+/// 
+/// </summary>
 public class Knife : MonoBehaviour
 {
 
     SpriteRenderer mesh;
-    public Vector2 movement;
+    Vector2 movement;
     Rigidbody2D rigidbody2d;
     AudioSource audioSource;
     /// <summary>
     /// 召喚時の音
     /// </summary>
-    public AudioClip spawn;
+    [SerializeField] AudioClip spawn;
     /// <summary>
     /// 飛んでく時の音
     /// </summary>
-    public AudioClip fly;
+    [SerializeField] AudioClip fly;
     /// <summary>
     /// ナイフが飛んでく角度
     /// </summary>
-    private int rote;
-    float rotation;
+    int _rote;
+    float _rotation;
     /// <summary>
     /// ナイフの加速度
     /// </summary>
-    float magnification;
-    float m_waitTime;
+    float _magnification;
+    float _waitTime;
 
     public bool m_play = true;
-    
+
 
     /// <summary>
     /// ベクトルから角度を取得する。
@@ -49,9 +51,9 @@ public class Knife : MonoBehaviour
         //スポーン時の情報を取得する
         GameObject spawner = GameObject.Find("SpawnArea");
         KnifeSpawn knife = spawner.GetComponent<KnifeSpawn>();
-        rote = knife.rote;
-        magnification = knife.magnification;
-        transform.rotation = Quaternion.Euler(0, 0, rote);
+        _rote = knife.rote;
+        _magnification = knife.magnification;
+        transform.rotation = Quaternion.Euler(0, 0, _rote);
         audioSource = GetComponent<AudioSource>();
         mesh = GetComponent<SpriteRenderer>();
         rigidbody2d = this.GetComponent<Rigidbody2D>();
@@ -62,14 +64,14 @@ public class Knife : MonoBehaviour
             mesh.material.color -= new Color32(0, 0, 0, 255);
             rigidbody2d.rotation -= 180;
         }
-        
-        
+
+
         Invoke("Destroy", 6);
     }
 
     IEnumerator Transparent()　//ここで召喚の挙動。ベクトルも取得している。
     {
-        if(m_play == true)
+        if (m_play == true)
         {
             audioSource.PlayOneShot(spawn);
             for (int i = 0; i < 30; i++)
@@ -81,12 +83,12 @@ public class Knife : MonoBehaviour
             }
             yield return new WaitForSeconds(0.1f);
         }
-        
-        rotation = transform.localEulerAngles.z;
 
-        movement = AngleToVector2(rotation);
-        
-        
+        _rotation = transform.localEulerAngles.z;
+
+        movement = AngleToVector2(_rotation);
+
+
 
         //c = 1; //ここで飛んでいく挙動が開始されるようになっている。
 
@@ -94,7 +96,7 @@ public class Knife : MonoBehaviour
 
         for (int i = 0; i < 50; i++)
         {
-            rigidbody2d.AddForce(movement * new Vector2(magnification, magnification)); //ForceMode2D.Impulse
+            rigidbody2d.AddForce(movement * new Vector2(_magnification, _magnification)); //ForceMode2D.Impulse
             yield return new WaitForSeconds(0.01f);
         }
 
@@ -108,8 +110,8 @@ public class Knife : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
-        
+
+
     }
 
     public void Destroy()
