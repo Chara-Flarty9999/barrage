@@ -1,9 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Bomber : MonoBehaviour
 {
+    [SerializeField] GameObject _bomberBullet = default;
     SpriteRenderer mesh;
     Vector2 movement;
     Rigidbody2D rigidbody2d;
@@ -26,9 +26,10 @@ public class Bomber : MonoBehaviour
     public float bulletRote;
     float _rotation;
     /// <summary>
-    /// ナイフの加速度
+    /// 炸裂弾の個数
     /// </summary>
     float _bulletNumber;
+
     float _waitTime;
 
     public static Vector2 AngleToVector2(float angle)
@@ -61,29 +62,29 @@ public class Bomber : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
 
         }
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(1f);
 
-        _rotation = transform.localEulerAngles.z;
-
-        movement = AngleToVector2(_rotation);
-
-
-
-        //c = 1; //ここで飛んでいく挙動が開始されるようになっている。
-
-        audioSource.PlayOneShot(fly);
-
-        for (int i = 1; i < _bulletNumber; i++)
+        bulletRote = transform.localEulerAngles.z;
+        AudioSource.PlayClipAtPoint(fly, PlayerHitbox.player.transform.position);
+        for (int i = 0; i < _bulletNumber; i++)
         {
+            Instantiate(_bomberBullet, this.transform.position, Quaternion.identity);
+            bulletRote += 360 / _bulletNumber;
             /*rigidbody2d.AddForce(movement * new Vector2(_bulletNumber, _bulletNumber)); //ForceMode2D.Impulse*/
             yield return new WaitForEndOfFrame();
         }
-
+        for (int i = 0;i < 30; i++)
+        {
+            mesh.material.color -= new Color32(0, 0, 0, 10);
+            transform.localScale += new Vector3(0.02f, 0.02f);
+            yield return new WaitForSeconds(0.01f);
+        }
+        Destroy(gameObject);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

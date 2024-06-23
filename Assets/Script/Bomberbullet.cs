@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Bomberbullet : MonoBehaviour
@@ -8,14 +7,11 @@ public class Bomberbullet : MonoBehaviour
     Vector2 movement;
     Rigidbody2D rigidbody2d;
     AudioSource audioSource;
-    /// <summary>
-    /// 召喚時の音
-    /// </summary>
-    [SerializeField] AudioClip spawn;
+
     /// <summary>
     /// 飛んでく時の音
     /// </summary>
-    [SerializeField] AudioClip fly;
+    //[SerializeField] AudioClip fly;
     /// <summary>
     /// ナイフが飛んでく角度
     /// </summary>
@@ -26,8 +22,6 @@ public class Bomberbullet : MonoBehaviour
     /// </summary>
     float _magnification;
     float _waitTime;
-
-    public bool m_play = true;
 
 
     /// <summary>
@@ -45,7 +39,7 @@ public class Bomberbullet : MonoBehaviour
     void Start()
     {
         //スポーン時の情報を取得する
-        GameObject spawner = GameObject.Find("Bomber");
+        GameObject spawner = GameObject.Find("Bomber(Clone)");
         Bomber knife = spawner.GetComponent<Bomber>();
         _rote = knife.bulletRote;
         _magnification = 10;
@@ -54,12 +48,12 @@ public class Bomberbullet : MonoBehaviour
         mesh = GetComponent<SpriteRenderer>();
         rigidbody2d = this.GetComponent<Rigidbody2D>();
         StartCoroutine("Bulletshoot");
-
+/*
         if (m_play == true)
         {
             mesh.material.color -= new Color32(0, 0, 0, 255);
             rigidbody2d.rotation -= 180;
-        }
+        }*/
 
 
         Destroy(gameObject, 6);
@@ -68,29 +62,30 @@ public class Bomberbullet : MonoBehaviour
 
     IEnumerator Bulletshoot()　//ここで召喚の挙動。ベクトルも取得している。
     {
-/*        if (m_play == true)
-        {
-            audioSource.PlayOneShot(spawn);
-            for (int i = 0; i < 30; i++)
-            {
-                mesh.material.color = mesh.material.color + new Color32(0, 0, 0, 9);
-                rigidbody2d.rotation += 6;
-                yield return new WaitForSeconds(0.01f);
+        /*        if (m_play == true)
+                {
+                    audioSource.PlayOneShot(spawn);
+                    for (int i = 0; i < 30; i++)
+                    {
+                        mesh.material.color = mesh.material.color + new Color32(0, 0, 0, 9);
+                        rigidbody2d.rotation += 6;
+                        yield return new WaitForSeconds(0.01f);
 
-            }
-            yield return new WaitForSeconds(0.1f);
-        }
-*/
+                    }
+                    yield return new WaitForSeconds(0.1f);
+                }
+        */
         _rotation = transform.localEulerAngles.z;
 
         movement = AngleToVector2(_rotation);
-        
+
 
 
         //c = 1; //ここで飛んでいく挙動が開始されるようになっている。
 
-        audioSource.PlayOneShot(fly);
+        //audioSource.PlayOneShot(fly);
         rigidbody2d.AddForce(movement * new Vector2(_magnification, _magnification), ForceMode2D.Impulse);
+        transform.rotation = Quaternion.Euler(0, 0, _rote - 90);
         yield return null;
     }
 }

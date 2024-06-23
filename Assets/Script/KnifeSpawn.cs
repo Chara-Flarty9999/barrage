@@ -15,6 +15,10 @@ public class KnifeSpawn : MonoBehaviour
     /// 進行方向が指定できるナイフ。(上下左右)
     /// </summary>
     [SerializeField] GameObject m_spawn2Prefab = default;
+    /// <summary>
+    /// 炸裂弾。
+    /// </summary>
+    [SerializeField] GameObject m_spawn3Prefab = default;
     public int rote;
     public float wait;
     public float magnification;
@@ -33,7 +37,22 @@ public class KnifeSpawn : MonoBehaviour
     {
         magnification = 20f;
 
-        
+        for (int i = 0; i < 45; i++)
+        {
+
+            //transform.position = Vector3.zero;
+            rote = UnityEngine.Random.Range(0, 360);
+            wait = 0.2f;
+            bulletNumber = 8;
+            float x = UnityEngine.Random.Range(-15.0f, 15.0f);
+            y = UnityEngine.Random.Range(-6.0f, 6.0f);
+            Vector3 spawn = new Vector3(x, y);
+            Instantiate(m_spawn3Prefab, spawn, Quaternion.identity);
+
+            yield return new WaitForSeconds(0.7f);
+
+        }
+
         for (int i = 0; i < 45; i++)
         {
 

@@ -524,10 +524,13 @@ MonoBehaviour:
     type: 3}
   m_spawn2Prefab: {fileID: 1693055095265320269, guid: 868c9b39aa1e68943beabbe1f5b7f0e6,
     type: 3}
+  m_spawn3Prefab: {fileID: 8941241150428115888, guid: 8e58c2bbad19c734685e695f219b6413,
+    type: 3}
   rote: 0
   wait: 0
   magnification: 0
   movedirection: left
+  bulletNumber: 0
 --- !u!1 &1212392526
 GameObject:
   m_ObjectHideFlags: 0
@@ -1081,7 +1084,7 @@ AudioSource:
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
-  Mute: 0
+  Mute: 1
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
