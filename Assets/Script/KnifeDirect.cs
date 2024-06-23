@@ -55,7 +55,7 @@ public class KnifeDirect: MonoBehaviour
     IEnumerator Transparent()
     {
         
-        audioSource.PlayOneShot(spawn);
+        //audioSource.PlayOneShot(spawn);
         for (int i = 0; i < 30; i++)
         {
             mesh.material.color = mesh.material.color + new Color32(0, 0, 0, 9);

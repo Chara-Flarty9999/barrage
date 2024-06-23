@@ -77,7 +77,7 @@ public class Knife : MonoBehaviour
     {
         if (m_play == true)
         {
-            audioSource.PlayOneShot(spawn);
+            //audioSource.PlayOneShot(spawn);
             for (int i = 0; i < 30; i++)
             {
                 mesh.material.color = mesh.material.color + new Color32(0, 0, 0, 9);
