@@ -20,6 +20,7 @@ public class KnifeSpawn : MonoBehaviour
     public float magnification;
     GameObject _player;
     public string movedirection = "left";
+    public int bulletNumber;
     // Start is called before the first frame update
     void Start()
     {

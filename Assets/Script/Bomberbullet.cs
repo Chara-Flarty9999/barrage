@@ -19,7 +19,7 @@ public class Bomberbullet : MonoBehaviour
     /// <summary>
     /// ナイフが飛んでく角度
     /// </summary>
-    int _rote;
+    float _rote;
     float _rotation;
     /// <summary>
     /// ナイフの加速度
@@ -45,15 +45,15 @@ public class Bomberbullet : MonoBehaviour
     void Start()
     {
         //スポーン時の情報を取得する
-        GameObject spawner = GameObject.Find("SpawnArea");
-        KnifeSpawn knife = spawner.GetComponent<KnifeSpawn>();
-        _rote = knife.rote;
-        _magnification = knife.magnification;
+        GameObject spawner = GameObject.Find("Bomber");
+        Bomber knife = spawner.GetComponent<Bomber>();
+        _rote = knife.bulletRote;
+        _magnification = 10;
         transform.rotation = Quaternion.Euler(0, 0, _rote);
         audioSource = GetComponent<AudioSource>();
         mesh = GetComponent<SpriteRenderer>();
         rigidbody2d = this.GetComponent<Rigidbody2D>();
-        StartCoroutine("Transparent");
+        StartCoroutine("Bulletshoot");
 
         if (m_play == true)
         {
@@ -66,7 +66,7 @@ public class Bomberbullet : MonoBehaviour
         //Invoke("Destroy");
     }
 
-    IEnumerator Transparent()　//ここで召喚の挙動。ベクトルも取得している。
+    IEnumerator Bulletshoot()　//ここで召喚の挙動。ベクトルも取得している。
     {
 /*        if (m_play == true)
         {
