@@ -8,6 +8,7 @@ public class Bomber : MonoBehaviour
     Vector2 movement;
     Rigidbody2D rigidbody2d;
     AudioSource audioSource;
+    Camera _cam;
     /// <summary>
     /// è¢ä´éûÇÃâπ
     /// </summary>
@@ -30,7 +31,7 @@ public class Bomber : MonoBehaviour
     /// </summary>
     float _bulletNumber;
 
-    float _waitTime;
+    float _blastWaitTime;
 
     public static Vector2 AngleToVector2(float angle)
     {
@@ -41,6 +42,8 @@ public class Bomber : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _cam = Camera.main;
+
         GameObject spawner = GameObject.Find("SpawnArea");
         KnifeSpawn knife = spawner.GetComponent<KnifeSpawn>();
         _rote = knife.rote;
@@ -62,10 +65,13 @@ public class Bomber : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
 
         }
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.8f);
 
+        Vector3 pos = _cam.transform.position;
         bulletRote = transform.localEulerAngles.z;
-        AudioSource.PlayClipAtPoint(fly, PlayerHitbox.player.transform.position);
+        AudioSource.PlayClipAtPoint(fly, pos);
+        yield return new WaitForSeconds(0.01f);
+
         for (int i = 0; i < _bulletNumber; i++)
         {
             Instantiate(_bomberBullet, this.transform.position, Quaternion.identity);
@@ -73,7 +79,7 @@ public class Bomber : MonoBehaviour
             /*rigidbody2d.AddForce(movement * new Vector2(_bulletNumber, _bulletNumber)); //ForceMode2D.Impulse*/
             yield return new WaitForEndOfFrame();
         }
-        for (int i = 0;i < 30; i++)
+        for (int i = 0; i < 30; i++)
         {
             mesh.material.color -= new Color32(0, 0, 0, 10);
             transform.localScale += new Vector3(0.02f, 0.02f);

@@ -6,7 +6,6 @@ public class Bomberbullet : MonoBehaviour
     SpriteRenderer mesh;
     Vector2 movement;
     Rigidbody2D rigidbody2d;
-    AudioSource audioSource;
 
     /// <summary>
     /// ”ò‚ñ‚Å‚­Žž‚Ì‰¹
@@ -44,7 +43,6 @@ public class Bomberbullet : MonoBehaviour
         _rote = knife.bulletRote;
         _magnification = 10;
         transform.rotation = Quaternion.Euler(0, 0, _rote);
-        audioSource = GetComponent<AudioSource>();
         mesh = GetComponent<SpriteRenderer>();
         rigidbody2d = this.GetComponent<Rigidbody2D>();
         StartCoroutine("Bulletshoot");
@@ -56,7 +54,7 @@ public class Bomberbullet : MonoBehaviour
         }*/
 
 
-        Destroy(gameObject, 6);
+        Destroy(gameObject, 4);
         //Invoke("Destroy");
     }
 

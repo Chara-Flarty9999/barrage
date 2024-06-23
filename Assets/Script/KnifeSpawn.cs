@@ -20,7 +20,7 @@ public class KnifeSpawn : MonoBehaviour
     /// </summary>
     [SerializeField] GameObject m_spawn3Prefab = default;
     public int rote;
-    public float wait;
+    public float blastWaitTime;
     public float magnification;
     GameObject _player;
     public string movedirection = "left";
@@ -41,24 +41,8 @@ public class KnifeSpawn : MonoBehaviour
         {
 
             //transform.position = Vector3.zero;
-            rote = UnityEngine.Random.Range(0, 360);
-            wait = 0.2f;
-            bulletNumber = 8;
-            float x = UnityEngine.Random.Range(-15.0f, 15.0f);
-            y = UnityEngine.Random.Range(-6.0f, 6.0f);
-            Vector3 spawn = new Vector3(x, y);
-            Instantiate(m_spawn3Prefab, spawn, Quaternion.identity);
-
-            yield return new WaitForSeconds(0.7f);
-
-        }
-
-        for (int i = 0; i < 45; i++)
-        {
-
-            //transform.position = Vector3.zero;
             rote = UnityEngine.Random.Range(150, 210);
-            wait = 0.2f;
+            blastWaitTime = 0.2f;
             float x = UnityEngine.Random.Range(10.0f, 15.0f);
             y = UnityEngine.Random.Range(-6.0f, 6.0f);
             Vector3 spawn = new Vector3(x, y);
@@ -213,7 +197,108 @@ public class KnifeSpawn : MonoBehaviour
             yield return new WaitForSeconds(0.3f);
         }
 
+        for (int i = 0; i < 10; i++)
+        {
+            
+            //transform.position = Vector3.zero;
+            rote = UnityEngine.Random.Range(0, 360);
+            blastWaitTime = 0.2f;
+            bulletNumber = 8;
+            float x = UnityEngine.Random.Range(-12.0f, 12.0f);
+            y = UnityEngine.Random.Range(-6.0f, 6.0f);
+            Vector3 spawn = new Vector3(x, y);
+            Instantiate(m_spawn3Prefab, spawn, Quaternion.identity);
 
+            yield return new WaitForSeconds(0.4f);
+
+        }
+
+        yield return new WaitForSeconds(0.8f);
+
+        for (int i = 0; i < 5; i++)
+        {
+            float y = PlayerHitbox.player.transform.position.y;
+            //transform.position = Vector3.zero;
+            rote = UnityEngine.Random.Range(0, 360);
+            blastWaitTime = 0.8f;
+            bulletNumber = 12;
+            float x = PlayerHitbox.player.transform.position.x;
+            Vector3 spawn = new Vector3(x, y);
+            Instantiate(m_spawn3Prefab, spawn, Quaternion.identity);
+            yield return new WaitForSeconds(1f);
+
+
+            y = PlayerHitbox.player.transform.position.y;
+            x = PlayerHitbox.player.transform.position.x - 5;
+            rote = 0;
+            spawn = new Vector3(x, y);
+            Instantiate(m_spawnPrefab, spawn, Quaternion.identity);
+            yield return new WaitForEndOfFrame();
+
+            y = PlayerHitbox.player.transform.position.y;
+            x = PlayerHitbox.player.transform.position.x + 5;
+            rote = 180;
+            spawn = new Vector3(x, y);
+            Instantiate(m_spawnPrefab, spawn, Quaternion.identity);
+            yield return new WaitForEndOfFrame();
+
+            y = PlayerHitbox.player.transform.position.y - 5;
+            x = PlayerHitbox.player.transform.position.x ;
+            rote = 90;
+            spawn = new Vector3(x, y);
+            Instantiate(m_spawnPrefab, spawn, Quaternion.identity);
+            yield return new WaitForEndOfFrame();
+
+            y = PlayerHitbox.player.transform.position.y + 5;
+            x = PlayerHitbox.player.transform.position.x ;
+            rote = 270;
+            spawn = new Vector3(x, y);
+            Instantiate(m_spawnPrefab, spawn, Quaternion.identity);
+            yield return new WaitForEndOfFrame();
+
+            yield return new WaitForSeconds(0.8f);
+
+            y = PlayerHitbox.player.transform.position.y;
+            //transform.position = Vector3.zero;
+            rote = UnityEngine.Random.Range(0, 360);
+            bulletNumber = 12;
+            x = PlayerHitbox.player.transform.position.x;
+            spawn = new Vector3(x, y);
+            Instantiate(m_spawn3Prefab, spawn, Quaternion.identity);
+            yield return new WaitForSeconds(1f);
+
+
+            y = PlayerHitbox.player.transform.position.y + 5;
+            x = PlayerHitbox.player.transform.position.x - 5;
+            rote = 315;
+            spawn = new Vector3(x, y);
+            Instantiate(m_spawnPrefab, spawn, Quaternion.identity);
+            yield return new WaitForEndOfFrame();
+
+            y = PlayerHitbox.player.transform.position.y + 5;
+            x = PlayerHitbox.player.transform.position.x + 5;
+            rote = 225;
+            spawn = new Vector3(x, y);
+            Instantiate(m_spawnPrefab, spawn, Quaternion.identity);
+            yield return new WaitForEndOfFrame();
+
+            y = PlayerHitbox.player.transform.position.y - 5;
+            x = PlayerHitbox.player.transform.position.x - 5;
+            rote = 45;
+            spawn = new Vector3(x, y);
+            Instantiate(m_spawnPrefab, spawn, Quaternion.identity);
+            yield return new WaitForEndOfFrame();
+
+            y = PlayerHitbox.player.transform.position.y - 5;
+            x = PlayerHitbox.player.transform.position.x + 5;
+            rote = 135;
+            spawn = new Vector3(x, y);
+            Instantiate(m_spawnPrefab, spawn, Quaternion.identity);
+            yield return new WaitForEndOfFrame();
+
+            yield return new WaitForSeconds(0.8f);
+
+        }
 
     }
 

@@ -527,7 +527,7 @@ MonoBehaviour:
   m_spawn3Prefab: {fileID: 8941241150428115888, guid: 8e58c2bbad19c734685e695f219b6413,
     type: 3}
   rote: 0
-  wait: 0
+  blastWaitTime: 0
   magnification: 0
   movedirection: left
   bulletNumber: 0
@@ -676,18 +676,18 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
+    m_MinSize: 0
+    m_MaxSize: 50
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 000000
+  m_Text: 
 --- !u!222 &1221140350
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -731,7 +731,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 144.19, y: -33.498}
+  m_AnchoredPosition: {x: 140, y: -40}
   m_SizeDelta: {x: 288.3856, y: 66.99521}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1377895789
@@ -756,11 +756,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 7988583e85b25a242a27c37dbf07e37a, type: 3}
-    m_FontSize: 30
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 3
-    m_MaxSize: 40
+    m_MinSize: 0
+    m_MaxSize: 60
     m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -1084,7 +1084,7 @@ AudioSource:
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
-  Mute: 1
+  Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128

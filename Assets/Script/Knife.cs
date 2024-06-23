@@ -69,7 +69,7 @@ public class Knife : MonoBehaviour
         }
 
 
-        Destroy(gameObject, 6);
+        Destroy(gameObject, 3);
         //Invoke("Destroy");
     }
 
