@@ -181,7 +181,7 @@ public class KnifeSpawn : MonoBehaviour
             Instantiate(m_spawnPrefab, spawn, Quaternion.identity);
             yield return new WaitForSeconds(0.2f);
         }
-        for (int m = 0;m <= 50; m++)
+        for (int m = 0; m <= 50; m++)
         {
             x = 13;
             y = Random.Range(-6.0f, 6.0f);
@@ -199,7 +199,7 @@ public class KnifeSpawn : MonoBehaviour
 
         for (int i = 0; i < 10; i++)
         {
-            
+
             //transform.position = Vector3.zero;
             rote = UnityEngine.Random.Range(0, 360);
             blastWaitTime = 0.2f;
@@ -243,14 +243,14 @@ public class KnifeSpawn : MonoBehaviour
             yield return new WaitForEndOfFrame();
 
             y = PlayerHitbox.player.transform.position.y - 5;
-            x = PlayerHitbox.player.transform.position.x ;
+            x = PlayerHitbox.player.transform.position.x;
             rote = 90;
             spawn = new Vector3(x, y);
             Instantiate(m_spawnPrefab, spawn, Quaternion.identity);
             yield return new WaitForEndOfFrame();
 
             y = PlayerHitbox.player.transform.position.y + 5;
-            x = PlayerHitbox.player.transform.position.x ;
+            x = PlayerHitbox.player.transform.position.x;
             rote = 270;
             spawn = new Vector3(x, y);
             Instantiate(m_spawnPrefab, spawn, Quaternion.identity);
@@ -300,8 +300,84 @@ public class KnifeSpawn : MonoBehaviour
 
         }
 
-    }
+        blastWaitTime = 0.2f;
 
+        for (int i = 0; i < 5; i++)
+        {
+            y = 0;
+            x = 8;
+            rote = 0;
+            bulletNumber = 8;
+            Vector3 spawn = new Vector3(x, y);
+            Instantiate(m_spawn3Prefab, spawn, Quaternion.identity);
+            yield return new WaitForEndOfFrame();
+
+            y = 3;
+            x = 11;
+            rote = 0;
+            spawn = new Vector3(x, y);
+            Instantiate(m_spawn3Prefab, spawn, Quaternion.identity);
+            yield return new WaitForEndOfFrame();
+
+            y = -3;
+            x = 11;
+            rote = 0;
+            spawn = new Vector3(x, y);
+            Instantiate(m_spawn3Prefab, spawn, Quaternion.identity);
+            yield return new WaitForSeconds(0.8f);
+
+            for (int j = 0; j < 8; j++)
+            {
+                y = UnityEngine.Random.Range(-5, 5);
+                x = 15;
+                magnification = 17;
+                rote = 90;
+                movedirection = "left";
+                spawn = new Vector3(x, y);
+                Instantiate(m_spawn2Prefab, spawn, Quaternion.identity);
+                yield return new WaitForSeconds(0.2f);
+            }
+
+            yield return new WaitForSeconds(0.8f);
+
+            y = 0;
+            x = -8;
+            rote = 0;
+            bulletNumber = 8;
+            spawn = new Vector3(x, y);
+            Instantiate(m_spawn3Prefab, spawn, Quaternion.identity);
+            yield return new WaitForEndOfFrame();
+
+            y = 3;
+            x = -11;
+            rote = 0;
+            spawn = new Vector3(x, y);
+            Instantiate(m_spawn3Prefab, spawn, Quaternion.identity);
+            yield return new WaitForEndOfFrame();
+
+            y = -3;
+            x = -11;
+            rote = 0;
+            spawn = new Vector3(x, y);
+            Instantiate(m_spawn3Prefab, spawn, Quaternion.identity);
+            yield return new WaitForSeconds(0.8f);
+
+            for (int j = 0; j < 8; j++)
+            {
+                y = UnityEngine.Random.Range(-5, 5);
+                x = -15;
+                magnification = 17;
+                rote = 90;
+                movedirection = "right";
+                spawn = new Vector3(x, y);
+                Instantiate(m_spawn2Prefab, spawn, Quaternion.identity);
+                yield return new WaitForSeconds(0.2f);
+            }
+
+            yield return new WaitForSeconds(0.8f);
+
+        }
+    }
     // Update is called once per frame
     void Update()
     {
