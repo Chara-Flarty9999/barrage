@@ -1,10 +1,12 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using static UnityEditor.PlayerSettings;
 
 public class KnifeSpawn : MonoBehaviour
 {
-    public int damage;
+    public int damage; //“Á‚ÉŽg‚Á‚Ä‚È‚¢
+
     float y;
     float x;
     /// <summary>
@@ -23,12 +25,19 @@ public class KnifeSpawn : MonoBehaviour
     public float blastWaitTime;
     public float magnification;
     GameObject _player;
+    public PlayerHitbox life;
     public string movedirection = "left";
     public int bulletNumber;
+
+    [SerializeField] AudioClip _heal;
+    AudioSource _AudioSource;
+
     // Start is called before the first frame update
     void Start()
     {
+        _AudioSource = GetComponent<AudioSource>();
         _player = GameObject.Find("Square");
+        life = _player.GetComponent<PlayerHitbox>();
         StartCoroutine("Hard");
     }
 
@@ -36,6 +45,8 @@ public class KnifeSpawn : MonoBehaviour
     IEnumerator Hard()
     {
         magnification = 20f;
+
+        
 
         for (int i = 0; i < 45; i++)
         {
@@ -51,6 +62,7 @@ public class KnifeSpawn : MonoBehaviour
             yield return new WaitForSeconds(0.2f);
 
         }
+
 
         yield return new WaitForSeconds(0.4f);
         y = 6;
@@ -170,8 +182,8 @@ public class KnifeSpawn : MonoBehaviour
 
         for (int m = 0; m <= 25; m++)
         {
-            y = Random.Range(-6.0f, 6.0f);
-            x = Random.Range(-13.0f, 13.0f);
+            y = UnityEngine.Random.Range(-6.0f, 6.0f);
+            x = UnityEngine.Random.Range(-13.0f, 13.0f);
             Vector2 spawn = new Vector2(x, y);
             //Vector2 dir = _player.transform.position - spawn;
             transform.position = spawn;
@@ -184,18 +196,22 @@ public class KnifeSpawn : MonoBehaviour
         for (int m = 0; m <= 50; m++)
         {
             x = 13;
-            y = Random.Range(-6.0f, 6.0f);
+            y = UnityEngine.Random.Range(-6.0f, 6.0f);
             Vector2 spawn = new Vector2(x, y);
             rote = 180;
             Instantiate(m_spawnPrefab, spawn, Quaternion.identity);
             yield return new WaitForEndOfFrame();
             x = -13;
-            y = Random.Range(-6.0f, 6.0f);
+            y = UnityEngine.Random.Range(-6.0f, 6.0f);
             spawn = new Vector2(x, y);
             rote = 0;
             Instantiate(m_spawnPrefab, spawn, Quaternion.identity);
             yield return new WaitForSeconds(0.3f);
         }
+
+        _AudioSource.PlayOneShot(_heal);
+        life.Heal();
+        yield return new WaitForSeconds(0.9f);
 
         for (int i = 0; i < 10; i++)
         {
@@ -375,7 +391,84 @@ public class KnifeSpawn : MonoBehaviour
             }
 
             yield return new WaitForSeconds(0.8f);
+        }
 
+
+        for (int i = 0; i < 5; i++)
+        {
+            y = 4;
+            x = 6;
+            rote = UnityEngine.Random.Range(0, 360);
+            bulletNumber = 10;
+            Vector3 spawn = new Vector3(x, y);
+            Instantiate(m_spawn3Prefab, spawn, Quaternion.identity);
+            yield return new WaitForEndOfFrame();
+
+            y = -4;
+            x = 6;
+            rote = UnityEngine.Random.Range(0, 360);
+            spawn = new Vector3(x, y);
+            Instantiate(m_spawn3Prefab, spawn, Quaternion.identity);
+            yield return new WaitForEndOfFrame();
+
+            y = 4;
+            x = -6;
+            rote = UnityEngine.Random.Range(0, 360);
+            bulletNumber = 10;
+            spawn = new Vector3(x, y);
+            Instantiate(m_spawn3Prefab, spawn, Quaternion.identity);
+            yield return new WaitForEndOfFrame();
+
+            y = -4;
+            x = -6;
+            rote = UnityEngine.Random.Range(0, 360);
+            spawn = new Vector3(x, y);
+            Instantiate(m_spawn3Prefab, spawn, Quaternion.identity);
+            yield return new WaitForEndOfFrame();
+
+            for (int j = 0; j < 8; j++)
+            {
+                float x = 11f;
+                float y = PlayerHitbox.player.transform.position.y;
+                magnification = 25;
+                rote = 180;
+                spawn = new Vector3(x, y);
+                Instantiate(m_spawnPrefab, spawn, Quaternion.identity);
+                yield return new WaitForEndOfFrame();
+                for (int k = 0; k < 6; k++)
+                {
+                    y = 2.7f;
+                    x = 11;
+                    magnification = 25;
+                    rote = 180;
+                    spawn = new Vector3(x, y);
+                    Instantiate(m_spawnPrefab, spawn, Quaternion.identity);
+                    yield return new WaitForEndOfFrame();
+                    y = -2.7f;
+                    spawn = new Vector3(x, y);
+                    Instantiate(m_spawnPrefab, spawn, Quaternion.identity);
+                    yield return new WaitForSeconds(0.1f);
+                }
+
+            }
+        }
+
+
+        for (int j = 0;j < 30; j++)
+        {
+            y = PlayerHitbox.player.transform.position.y;
+            x = 11;
+            magnification= 25;
+            rote = 180;
+            Vector3 spawn = new Vector3(x, y);
+            Instantiate(m_spawnPrefab, spawn, Quaternion.identity);
+            yield return new WaitForEndOfFrame();
+            y = 7;
+            x = PlayerHitbox.player.transform.position.x;
+            rote = 270;
+            spawn = new Vector3(x, y);
+            Instantiate(m_spawnPrefab, spawn, Quaternion.identity);
+            yield return new WaitForSeconds(0.05f);
         }
     }
     // Update is called once per frame
