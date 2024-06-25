@@ -62,7 +62,7 @@ public class KnifeSpawn : MonoBehaviour
 
         }
 
-
+        
 
         yield return new WaitForSeconds(0.4f);
         y = 6;
@@ -454,7 +454,7 @@ public class KnifeSpawn : MonoBehaviour
         }
 
 
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 2; i++)
         {
             for (int j = 0; j < 30; j++)
             {
@@ -476,12 +476,18 @@ public class KnifeSpawn : MonoBehaviour
             for (x = -11; x <= 11; x += 4)
             {
                 bulletNumber = 10;
-                y = 0;
+                y = 6;
                 rote = UnityEngine.Random.Range(0, 360);
                 Vector3 spawn = new Vector3(x, y);
                 Instantiate(m_spawn3Prefab, spawn, Quaternion.identity);
-                yield return new WaitForSeconds(0.3f);
+                yield return new WaitForEndOfFrame();
+                y = -6;
+                rote = UnityEngine.Random.Range(0, 360);
+                spawn = new Vector3(x, y);
+                Instantiate(m_spawn3Prefab, spawn, Quaternion.identity);
+                yield return new WaitForSeconds(0.4f);
             }
+
             yield return new WaitForSeconds(0.8f);
         }
 
