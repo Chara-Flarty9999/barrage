@@ -8,7 +8,7 @@ public class TimerCounter : MonoBehaviour
     AudioSource m_AudioSource;
     GameObject m_timeText = default;
     float _nowtime;
-    float _maxtime = 120f;
+    float _maxtime = 123f;
     float _time;
     GameObject m_lifeText;
     GameObject m_gameover;
