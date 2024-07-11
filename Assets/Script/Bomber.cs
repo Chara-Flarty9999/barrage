@@ -77,7 +77,7 @@ public class Bomber : MonoBehaviour
             Instantiate(_bomberBullet, this.transform.position, Quaternion.identity);
             bulletRote += 360 / _bulletNumber;
             /*rigidbody2d.AddForce(movement * new Vector2(_bulletNumber, _bulletNumber)); //ForceMode2D.Impulse*/
-            yield return new WaitForEndOfFrame();
+            yield return null;
         }
         for (int i = 0; i < 30; i++)
         {
